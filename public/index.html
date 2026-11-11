@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#f6f7f3">
+  <title>Second Brain | Your knowledge, connected</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <aside class="sidebar">
+    <a class="brand" href="#overview" aria-label="Second Brain home">
+      <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span>second brain<span class="brand-subtitle">A little space for a clearer mind.</span></span>
+    </a>
+    <div class="workspace-label">YOUR WORKSPACE</div>
+    <nav aria-label="Main navigation">
+      <button class="nav-item active" data-view="overview"><span class="nav-symbol" aria-hidden="true">&#9638;</span>Overview</button>
+      <button class="nav-item" data-view="sources"><span class="nav-symbol" aria-hidden="true">&#9633;</span>Source library<span class="nav-count" id="source-count">0</span></button>
+      <button class="nav-item" data-view="wiki"><span class="nav-symbol" aria-hidden="true">&#9672;</span>Wiki pages<span class="nav-count" id="wiki-count">0</span></button>
+      <button class="nav-item" data-view="activity"><span class="nav-symbol" aria-hidden="true">&#9684;</span>Activity log</button>
+    </nav>
+    <div class="sidebar-note">
+      <span class="small-orbit" aria-hidden="true">&#10035;</span>
+      <strong>Good ideas deserve a home.</strong>
+      <p>Collect your sources. Connect what matters. Build on what you know.</p>
+    </div>
+    <div class="local-status"><span class="status-dot"></span><span>Local workspace<small>Files stay on your computer</small></span></div>
+  </aside>
+
+  <main id="main" tabindex="-1">
+    <header class="topbar">
+      <div class="breadcrumb">WORKSPACE<span>/</span><strong id="breadcrumb">OVERVIEW</strong></div>
+      <button class="button button-quiet" id="refresh-button" type="button"><span aria-hidden="true">&#8635;</span> Refresh</button>
+    </header>
+    <div class="page-content">
+      <section class="page-heading">
+        <div><div class="eyebrow">YOUR KNOWLEDGE, CONNECTED</div><h1 id="page-title">Room for your next idea.</h1><p id="page-description">A quiet place to collect, explore, and connect what you know.</p></div>
+        <button class="button button-primary" id="upload-button" type="button"><span aria-hidden="true">+</span> Add documents</button>
+      </section>
+
+      <div class="error-banner" id="error-banner" role="alert" hidden></div>
+
+      <section class="stats" id="stats" aria-label="Workspace statistics">
+        <article class="stat-card"><span class="stat-icon sage" aria-hidden="true">&#9633;</span><div><span class="stat-label">Source documents</span><strong id="stat-sources">0</strong><small>Originals, safely preserved</small></div></article>
+        <article class="stat-card"><span class="stat-icon lavender" aria-hidden="true">&#9672;</span><div><span class="stat-label">Wiki pages</span><strong id="stat-wiki">0</strong><small>Knowledge taking shape</small></div></article>
+        <article class="stat-card"><span class="stat-icon sand" aria-hidden="true">&#9684;</span><div><span class="stat-label">Last activity</span><strong class="stat-date" id="stat-updated">Not yet</strong><small>Based on your local files</small></div></article>
+      </section>
+
+      <div class="workspace-grid">
+        <section class="library-panel" id="library-panel" aria-labelledby="library-title">
+          <div class="panel-heading"><div><h2 id="library-title">Your library</h2><p id="library-subtitle">Everything you've collected, in one place.</p></div><span class="pill" id="result-count">0 items</span></div>
+          <div class="search-wrap"><span aria-hidden="true">&#9906;</span><input id="search-input" type="search" placeholder="Search names and document text..." maxlength="200" aria-label="Search your library"><kbd aria-hidden="true">/</kbd></div>
+          <div class="filter-row" role="group" aria-label="Filter documents">
+            <button class="filter active" data-filter="all">All</button>
+            <button class="filter" data-filter="source">Sources</button>
+            <button class="filter" data-filter="wiki">Wiki</button>
+            <span class="sort-label">Recently updated</span>
+          </div>
+          <div id="library-list" class="library-list" aria-live="polite" aria-busy="true"><p class="loading-message">Opening your workspace...</p></div>
+          <p class="search-note">Text search covers the first 1 MB of readable documents. PDF and Office files are searched by filename.</p>
+        </section>
+
+        <aside class="right-column" id="right-column">
+          <section class="upload-card" aria-labelledby="capture-title">
+            <div class="eyebrow">MAKE ROOM FOR MORE</div><h2 id="capture-title">Start with a source.</h2><p>Notes, documents, research. Bring the pieces together.</p>
+            <button class="dropzone" id="dropzone" type="button"><span class="upload-symbol" aria-hidden="true">&#8593;</span><strong>Drop documents here</strong><span>or click to browse your files</span><small>PDF, Word, Markdown + more<br>Up to 20 MB per document</small></button>
+            <input id="file-input" type="file" multiple hidden accept=".md,.markdown,.txt,.pdf,.docx,.xlsx,.pptx,.rtf,.csv,.json,.log,.html,.htm,.xml,.yaml,.yml">
+            <div class="upload-results" id="upload-results" aria-live="polite"></div>
+            <p class="privacy-note"><span class="status-dot"></span> Local storage. No external AI service.</p>
+          </section>
+          <section class="next-card"><span class="eyebrow">FROM SOURCES TO UNDERSTANDING</span><h3>Let your knowledge grow.</h3><p>Uploads land in <code>raw\sources</code>. To connect ideas and build your wiki, ask your coding agent to ingest a source.</p><button class="text-button" id="open-index" type="button">Explore your wiki index <span aria-hidden="true">&#8594;</span></button></section>
+        </aside>
+      </div>
+      <footer class="page-footer"><span id="workspace-name">work-second-brain</span><span>No cloud. No auto-ingestion. Your files, your control.</span></footer>
+    </div>
+  </main>
+
+  <dialog id="reader" aria-labelledby="reader-title">
+    <div class="reader-toolbar"><span class="reader-label" id="reader-category">DOCUMENT</span><div><button class="button button-quiet" id="copy-path" type="button">Copy path</button><a class="button button-quiet" id="download-link" download>Download</a><button class="close-button" id="close-reader" type="button" aria-label="Close document">&times;</button></div></div>
+    <div class="reader-body"><h1 id="reader-title"></h1><div class="reader-meta" id="reader-meta"></div><div class="reader-notice" id="reader-notice" hidden></div><article id="reader-content" class="markdown"></article></div>
+  </dialog>
+  <div class="toast" id="toast" role="status" hidden></div>
+</body>
+</html>

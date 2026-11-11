@@ -1,0 +1,14 @@
+{
+  "name": "work-second-brain",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A local-only document library and Markdown wiki reader.",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test server.test.js"
+  }
+}

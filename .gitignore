@@ -1,0 +1,8 @@
+/.uploads/
+/.runtime/
+/node_modules/
+.env
+.env.*
+Thumbs.db
+Desktop.ini
+.obsidian/workspace*.json
